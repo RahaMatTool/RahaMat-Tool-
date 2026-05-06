@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>RahaMat Ali | 10,000+ Web Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>RahaMat Ali | 10,000+ Professional Web Tools</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -13,6 +13,62 @@
             color: white;
             min-height: 100vh;
             transition: all 0.3s;
+        }
+        
+        /* Category Buttons Scroll Container - Top Par */
+        .category-buttons-top {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+            position: sticky;
+            top: 73px;
+            z-index: 99;
+        }
+        .category-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+        .category-scroll::-webkit-scrollbar { height: 4px; }
+        .category-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .category-scroll::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+        .cat-buttons {
+            display: inline-flex;
+            gap: 12px;
+            padding: 5px 0;
+        }
+        .cat-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+            white-space: nowrap;
+        }
+        .cat-btn:hover { transform: translateY(-2px); background: rgba(168,85,247,0.4); border-color: #a855f7; }
+        .cat-btn.active { background: #a855f7; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.5); }
+        
+        .page-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            min-height: 70vh;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .page.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .navbar {
@@ -30,8 +86,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
-            gap: 15px;
         }
         .logo {
             font-size: 24px;
@@ -41,47 +97,51 @@
             -webkit-background-clip: text;
             color: transparent;
             cursor: pointer;
+            white-space: nowrap;
         }
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 25px;
             transition: 0.3s;
             cursor: pointer;
+            white-space: nowrap;
+            font-size: 14px;
         }
         .nav-links a:hover, .nav-links a.active { background: #a855f7; }
         
+        /* Hero Section - sirf Home page mein */
         .hero {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: linear-gradient(135deg, #0f0c29, #302b63);
         }
         .hero h1 { font-size: 48px; background: linear-gradient(135deg, #fff, #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 15px; }
         .hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: auto; }
         
-        /* Pricing Tags in Hero */
-        .pricing-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
+        .search-container {
+            max-width: 400px;
+            margin: 20px auto 0;
         }
-        .pricing-badge {
-            background: rgba(255,255,255,0.1);
-            padding: 10px 20px;
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
             border-radius: 50px;
-            font-size: 14px;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            backdrop-filter: blur(10px);
         }
-        .pricing-badge.basic { border-left: 4px solid #22c55e; }
-        .pricing-badge.medium { border-left: 4px solid #eab308; }
-        .pricing-badge.advanced { border-left: 4px solid #ef4444; }
+        .search-container input::placeholder { color: rgba(255,255,255,0.6); }
         
         .stats {
             display: flex;
@@ -98,75 +158,8 @@
         }
         .stat-number { font-size: 32px; font-weight: bold; color: #a855f7; }
         
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        
-        .dynamic-section {
-            margin: 40px 0;
-            padding: 30px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 25px;
-        }
-        .portfolio-section {
-            margin: 40px 0;
-            padding: 30px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 25px;
-        }
-        .portfolio-grid {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .profile-card {
-            text-align: center;
-            padding: 30px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 25px;
-            max-width: 400px;
-            width: 100%;
-        }
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid #a855f7;
-        }
-        .profile-img-placeholder {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: #a855f7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            margin: 0 auto 20px;
-        }
-        
-        .category-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin: 30px 0;
-        }
-        .cat-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: white;
-        }
-        .cat-btn:hover { transform: translateY(-3px); background: rgba(168,85,247,0.4); border-color: #a855f7; }
-        .cat-btn.active { background: #a855f7; border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.5); }
-        
         .section-title { text-align: center; font-size: 28px; margin: 20px 0; color: #a855f7; }
+        .section-title-small { text-align: center; font-size: 22px; margin: 15px 0; color: #a855f7; }
         
         .tools-grid {
             display: grid;
@@ -179,16 +172,17 @@
             border-radius: 20px;
             padding: 18px;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
             border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            word-break: break-word;
             cursor: pointer;
             position: relative;
-            backdrop-filter: blur(10px);
         }
         .tool-card:hover { transform: translateY(-5px); border-color: #a855f7; background: rgba(168,85,247,0.15); }
         .tool-icon { font-size: 42px; margin-bottom: 10px; }
-        .tool-card h4 { font-size: 14px; margin-bottom: 6px; color: #fff; }
-        .tool-card p { font-size: 10px; opacity: 0.7; margin-bottom: 12px; }
+        .tool-card h4 { font-size: 15px; margin-bottom: 6px; color: #fff; line-height: 1.3; }
+        .tool-card p { font-size: 10px; opacity: 0.7; margin-bottom: 12px; line-height: 1.4; }
         .price-tag {
             position: absolute;
             top: 10px;
@@ -202,11 +196,24 @@
         .price-tag.medium { background: #eab308; color: #1a1a2e; }
         .price-tag.advanced { background: #ef4444; }
         
+        .rating-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0,0,0,0.3);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin: 8px 0;
+        }
+        .star { font-size: 14px; color: #ffc107; }
+        .rating-number { font-size: 11px; font-weight: bold; color: #ffc107; }
+        .reviews-count { font-size: 9px; opacity: 0.6; }
+        
         .tool-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         .demo-btn {
             background: #22c55e;
@@ -217,7 +224,7 @@
             font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.2s;
         }
         .demo-btn:hover { background: #16a34a; transform: scale(1.02); }
         .buy-btn {
@@ -229,9 +236,80 @@
             font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.2s;
         }
         .buy-btn:hover { background: #ca8a04; transform: scale(1.02); }
+        
+        /* Portfolio Page */
+        .portfolio-page { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .portfolio-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .portfolio-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #a855f7;
+        }
+        .portfolio-img-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #a855f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin: 0 auto 20px;
+        }
+        .portfolio-name { font-size: 32px; margin-bottom: 10px; color: #a855f7; }
+        .portfolio-bio { font-size: 18px; margin-bottom: 20px; opacity: 0.9; }
+        .portfolio-skills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
+        .skill-badge { background: rgba(168,85,247,0.3); padding: 5px 15px; border-radius: 50px; font-size: 14px; }
+        .contact-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+        .contact-btn { background: #25D366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; }
+        .email-btn { background: #a855f7; }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .page-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+        }
+        .page-btn:hover { background: rgba(168,85,247,0.4); }
+        .page-btn.active { background: #a855f7; border-color: #a855f7; }
+        .page-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .loader { text-align: center; padding: 40px; }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: #a855f7;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .empty-state { text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.05); border-radius: 20px; }
+        .empty-state h3 { font-size: 24px; margin-bottom: 10px; color: #a855f7; }
         
         .admin-float-btn {
             position: fixed;
@@ -310,7 +388,6 @@
             transition: 0.3s;
         }
         .admin-tab.active { background: #a855f7; }
-        .admin-tab:hover { background: #a855f7; }
         
         .admin-section { display: none; }
         .admin-section.active { display: block; }
@@ -321,17 +398,6 @@
             align-items: center;
             padding: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .section-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            margin: 10px 0;
-            border-radius: 15px;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -371,7 +437,13 @@
             gap: 30px;
         }
         .footer-section h4 { margin-bottom: 15px; color: #a855f7; }
-        .footer-section a { display: block; color: #ccc; text-decoration: none; margin: 8px 0; cursor: pointer; }
+        .footer-section a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin: 8px 0;
+            cursor: pointer;
+        }
         .footer-section a:hover { color: #a855f7; }
         .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px; font-size: 12px; opacity: 0.7; }
         
@@ -422,10 +494,17 @@
             .tools-grid { gap: 12px; }
             .tool-card { padding: 12px; }
             .tool-icon { font-size: 32px; }
-            .tool-card h4 { font-size: 11px; }
+            .tool-card h4 { font-size: 12px; }
             .demo-btn, .buy-btn { padding: 4px 10px; font-size: 9px; }
-            .pricing-info { gap: 10px; }
-            .pricing-badge { font-size: 10px; padding: 5px 10px; }
+            .stats { gap: 15px; }
+            .stat { padding: 8px 15px; }
+            .stat-number { font-size: 24px; }
+            .cat-btn { padding: 6px 12px; font-size: 12px; }
+            .page-btn { padding: 6px 10px; font-size: 12px; }
+            .category-buttons-top { top: 60px; padding: 10px 15px; }
+            .nav-container { gap: 10px; justify-content: center; }
+            .logo { font-size: 20px; }
+            .nav-links a { padding: 5px 12px; font-size: 12px; }
         }
     </style>
 </head>
@@ -433,23 +512,31 @@
 
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo" onclick="showSection('home')">RahaMat<span style="color:#a855f7">Ali</span>.Tools</div>
-        <div class="nav-links" id="navLinks">
-            <a class="active" onclick="showSection('home')">🏠 Home</a>
-            <a onclick="showSection('portfolio')">📸 Portfolio</a>
+        <div class="logo" onclick="showPage('home')">RahaMat<span style="color:#a855f7">Ali</span>.Tools</div>
+        <div class="nav-links">
+            <a onclick="showPage('home')" class="active">🏠 Home</a>
+            <a onclick="showPage('tools')">🛠️ All Tools</a>
+            <a onclick="showPage('portfolio')">📸 Portfolio</a>
+            <a onclick="showPage('about')">ℹ️ About</a>
+            <a onclick="showPage('contact')">📞 Contact</a>
         </div>
     </div>
 </nav>
 
-<section class="hero">
+<!-- Category Buttons - Top Par (Sirf Tools Page Mein) -->
+<div id="categoryButtonsTop" class="category-buttons-top" style="display: none;">
+    <div class="category-scroll">
+        <div class="cat-buttons" id="topCategoryButtons"></div>
+    </div>
+</div>
+
+<!-- Hero Section - Sirf Home Page Mein Dikhayenge -->
+<div id="heroSection" class="hero" style="display: block;">
     <h1 id="heroTitle">10,000+ Professional Web Tools</h1>
     <p id="heroDesc">QR Code, BMI, EMI, Password, Calculator & 10,000+ tools at one place. One-time payment!</p>
     
-    <!-- Pricing System Display -->
-    <div class="pricing-info">
-        <div class="pricing-badge basic">🔵 Basic Tools → $7 - $10</div>
-        <div class="pricing-badge medium">🟢 Medium Tools → $11 - $15</div>
-        <div class="pricing-badge advanced">🔴 Advanced Tools → $16 - $20</div>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search tools... (e.g., QR, BMI, Calculator)">
     </div>
     
     <div class="stats">
@@ -457,9 +544,73 @@
         <div class="stat"><div class="stat-number" id="categoryCount">0</div><div>Categories</div></div>
         <div class="stat"><div class="stat-number">$7-20</div><div>Prices</div></div>
     </div>
-</section>
+</div>
 
-<div class="container" id="dynamicSectionsContainer"></div>
+<!-- Page Container -->
+<div class="page-container">
+    <!-- Home Page (Landing Page - Categories) -->
+    <div id="homePage" class="page active">
+        <div id="homeCategoriesSection"></div>
+    </div>
+
+    <!-- Tools Page (All Tools with Categories) -->
+    <div id="toolsPage" class="page">
+        <div id="toolsHeader"></div>
+        <div id="toolsLoader" class="loader" style="display:none;"><div class="spinner"></div></div>
+        <div id="toolsGridContainer" class="tools-grid"></div>
+        <div id="paginationContainer" class="pagination"></div>
+    </div>
+
+    <!-- Portfolio Page -->
+    <div id="portfolioPage" class="page">
+        <div class="portfolio-page">
+            <div class="portfolio-card">
+                <div id="portfolioPhotoContainer">
+                    <div class="portfolio-img-placeholder">👤</div>
+                </div>
+                <h2 class="portfolio-name" id="portfolioName">RahaMat Ali</h2>
+                <p class="portfolio-bio" id="portfolioBio">Web Tools Developer | 10,000+ Tools Created</p>
+                <div class="portfolio-skills" id="portfolioSkills">
+                    <span class="skill-badge">HTML</span>
+                    <span class="skill-badge">CSS</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">Web Apps</span>
+                </div>
+                <div class="contact-buttons">
+                    <button class="contact-btn" id="portfolioWhatsappBtn">💬 WhatsApp</button>
+                    <button class="contact-btn email-btn" id="portfolioEmailBtn">📧 Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="aboutPage" class="page">
+        <div class="about-section" style="max-width:800px; margin:0 auto;">
+            <h2 class="section-title">🚀 About RahaMat Ali</h2>
+            <p style="font-size:18px; margin:20px 0;">I'm a professional web tools developer with expertise in HTML, CSS, JavaScript. I create 10,000+ powerful web tools used by thousands of users worldwide.</p>
+            <h3 class="section-title-small">✨ Why Choose My Tools?</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:15px; margin:20px 0;">
+                <div>✓ 10,000+ Tools</div>
+                <div>✓ One-time Payment</div>
+                <div>✓ Lifetime Access</div>
+                <div>✓ No Subscription</div>
+                <div>✓ Works on All Devices</div>
+                <div>✓ 24/7 Support</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contactPage" class="page">
+        <div class="contact-card" style="max-width:500px; margin:0 auto;">
+            <h2>📞 Get in Touch</h2>
+            <p style="margin:15px 0;">Need a custom tool? Have questions? WhatsApp me directly!</p>
+            <button class="whatsapp-btn" id="contactWhatsappBtn">💬 Message on WhatsApp</button>
+            <p style="margin-top:20px;">📧 Email: <span id="contactEmail">RahamatTool@gmail.com</span></p>
+        </div>
+    </div>
+</div>
 
 <div class="admin-float-btn" onclick="showAdminLogin()">👑</div>
 
@@ -492,13 +643,11 @@
 <div id="adminPanel" class="admin-modal">
     <div class="admin-modal-content">
         <h2>👑 Full Admin Control Panel</h2>
-        
         <div class="admin-tabs">
             <div class="admin-tab active" data-tab="dashboard">📊 Dashboard</div>
             <div class="admin-tab" data-tab="addtool">➕ Add Tool</div>
             <div class="admin-tab" data-tab="managetools">✏️ Manage Tools</div>
             <div class="admin-tab" data-tab="categories">📂 Categories</div>
-            <div class="admin-tab" data-tab="sections">📄 Sections</div>
             <div class="admin-tab" data-tab="portfolio">📸 Portfolio</div>
             <div class="admin-tab" data-tab="website">🌐 Website</div>
         </div>
@@ -507,10 +656,6 @@
             <h3>📊 Statistics</h3>
             <p><strong>Total Categories:</strong> <span id="adminTotalCats">0</span></p>
             <p><strong>Total Tools:</strong> <span id="adminTotalTools">0</span></p>
-            <p><strong>Total Sections:</strong> <span id="adminTotalSections">0</span></p>
-            <hr>
-            <h3>💰 Pricing Levels</h3>
-            <p>🔵 Basic: $7 - $10 | 🟢 Medium: $11 - $15 | 🔴 Advanced: $16 - $20</p>
             <hr>
             <button onclick="exportData()">📥 Export All Data</button>
             <button onclick="importData()">📤 Import Data</button>
@@ -521,7 +666,7 @@
             <h3>➕ Add New Tool</h3>
             <select id="newToolCat"></select>
             <input type="text" id="newToolName" placeholder="Tool Name">
-            <input type="text" id="newToolIcon" placeholder="Icon (e.g., 🔧)" value="🔧">
+            <input type="text" id="newToolIcon" placeholder="Icon" value="🔧">
             <input type="text" id="newToolDesc" placeholder="Description">
             <select id="newToolLevel">
                 <option value="basic">🔵 Basic ($7-$10)</option>
@@ -549,33 +694,13 @@
             <button class="success" onclick="addNewCategory()">Add Category</button>
         </div>
         
-        <div id="admin-sections" class="admin-section">
-            <h3>📄 Manage Website Sections</h3>
-            <div id="sectionsManageList"></div>
-            <hr>
-            <h3>➕ Add New Section</h3>
-            <input type="text" id="newSectionName" placeholder="Section Name">
-            <input type="text" id="newSectionIcon" placeholder="Icon">
-            <select id="newSectionType">
-                <option value="html">Custom HTML</option>
-                <option value="about">About Section</option>
-                <option value="contact">Contact Section</option>
-            </select>
-            <textarea id="newSectionContent" rows="3" placeholder="HTML content"></textarea>
-            <button class="success" onclick="addNewSection()">Add Section</button>
-        </div>
-        
         <div id="admin-portfolio" class="admin-section">
             <h3>📸 Portfolio Settings</h3>
-            <label>Profile Photo:</label>
             <input type="file" id="profilePhotoUpload" accept="image/*">
             <button onclick="uploadProfilePhoto()">Upload Photo</button>
             <div id="currentPhotoPreview" style="margin:15px 0;"></div>
-            <label>Profile Name:</label>
             <input type="text" id="editProfileName" placeholder="Your Name">
-            <label>Bio:</label>
             <textarea id="editProfileBio" rows="2" placeholder="Your Bio"></textarea>
-            <label>Skills:</label>
             <input type="text" id="editProfileSkills" placeholder="Skills (comma separated)">
             <button class="success" onclick="savePortfolioSettings()">💾 Save Portfolio</button>
         </div>
@@ -587,14 +712,13 @@
             <input type="text" id="editEmail" placeholder="Email" value="RahamatTool@gmail.com">
             <input type="text" id="editWhatsapp" placeholder="WhatsApp" value="919074797019">
             <input type="text" id="editCopyright" placeholder="Copyright">
-            <h3>🎨 Colors</h3>
             <input type="color" id="primaryColor" value="#a855f7">
             <input type="color" id="bgStart" value="#0f0c29">
             <input type="color" id="bgEnd" value="#302b63">
             <button class="success" onclick="saveWebsiteSettings()">💾 Save</button>
         </div>
         
-        <button onclick="closeAdminPanel()" style="background:#ef4444; margin-top:20px;">Close Admin Panel</button>
+        <button onclick="closeAdminPanel()" style="background:#ef4444; margin-top:20px;">Close</button>
     </div>
 </div>
 
@@ -603,23 +727,6 @@
     
     const ADMIN_ID = "rahmat";
     const ADMIN_PASSWORD = "admin123";
-    
-    // Pricing function based on tool complexity
-    const BASIC_PRICES = [7, 8, 9, 10];
-    const MEDIUM_PRICES = [11, 12, 13, 14, 15];
-    const ADVANCED_PRICES = [16, 17, 18, 19, 20];
-    
-    function getPriceByLevel(level) {
-        if(level === 'basic') return BASIC_PRICES[Math.floor(Math.random() * BASIC_PRICES.length)];
-        if(level === 'medium') return MEDIUM_PRICES[Math.floor(Math.random() * MEDIUM_PRICES.length)];
-        return ADVANCED_PRICES[Math.floor(Math.random() * ADVANCED_PRICES.length)];
-    }
-    
-    function getPriceClass(price) {
-        if(price <= 10) return 'basic';
-        if(price <= 15) return 'medium';
-        return 'advanced';
-    }
     
     let websiteSettings = {
         heroTitle: "10,000+ Professional Web Tools",
@@ -636,13 +743,8 @@
         profilePhoto: "",
         profileName: "RahaMat Ali",
         profileBio: "Web Tools Developer | 10,000+ Tools Created",
-        profileSkills: "HTML, CSS, JavaScript, Web Apps, Python"
+        profileSkills: ["HTML", "CSS", "JavaScript", "Web Apps", "Python"]
     };
-    
-    let websiteSections = [
-        { id: "section_about", name: "About", icon: "ℹ️", type: "about", content: "<h2>🚀 About RahaMat Ali</h2><p>I'm a professional web tools developer with expertise in HTML, CSS, JavaScript. I create 10,000+ powerful web tools.</p><br><h3>✨ Why Choose My Tools?</h3><p>✓ 10,000+ Tools<br>✓ One-time Payment<br>✓ Lifetime Access<br>✓ Works on All Devices</p>", order: 1, enabled: true },
-        { id: "section_contact", name: "Contact", icon: "📞", type: "contact", content: "Need a custom tool? WhatsApp me directly!", order: 2, enabled: true }
-    ];
     
     let categories = [
         { id: 0, name: "Students", icon: "🎓", tools: [] },
@@ -659,17 +761,57 @@
         { id: 11, name: "Gamers", icon: "🎮", tools: [] }
     ];
     
-    // Tool names with complexity levels
-    let basicTools = ["Calculator","Age Calculator","Date Calculator","Time Calculator","Unit Converter","Temperature Converter","Length Converter","Weight Converter","Speed Converter","Area Converter","Volume Converter","BMI","Percentage","Discount","Tip","GST","RD","FD","PPF"];
-    let mediumTools = ["QR Code","Password Generator","Random Number","Username Generator","Color Picker","EMI","Loan Calculator","Mortgage","SIP","GPA","Grade Calculator","Attendance Tracker","Study Timer","Flashcard","Quiz","Word Counter","Character Counter","Case Converter","Palindrome Checker","Lorem Ipsum"];
-    let advancedTools = ["PDF Editor","Image Compressor","JSON Formatter","HTML Minifier","CSS Editor","XML Formatter","SQL Formatter","MD5 Generator","SHA Generator","Base64 Encode","URL Shortener","SEO Analyzer","Grammar Checker","Plagiarism Checker","AI Text Generator","Sentiment Analyzer","Data Visualizer","Chart Generator","API Tester","Code Formatter"];
+    function generateRandomRating() { return (3.5 + Math.random() * 1.5).toFixed(1); }
+    
+    let toolRatings = {};
+    
+    function loadRatings() {
+        let saved = localStorage.getItem("raha_tool_ratings_v7");
+        if(saved) toolRatings = JSON.parse(saved);
+    }
+    
+    function getToolRating(toolId) {
+        if(toolRatings[toolId]) return toolRatings[toolId];
+        let newRating = generateRandomRating();
+        toolRatings[toolId] = newRating;
+        return newRating;
+    }
+    
+    function getPriceClass(price) {
+        if(price <= 10) return 'basic';
+        if(price <= 15) return 'medium';
+        return 'advanced';
+    }
+    
+    function getPriceByLevel(level) {
+        if(level === 'basic') return [7,8,9,10][Math.floor(Math.random() * 4)];
+        if(level === 'medium') return [11,12,13,14,15][Math.floor(Math.random() * 5)];
+        return [16,17,18,19,20][Math.floor(Math.random() * 5)];
+    }
+    
+    let toolDescriptions = {
+        "Calculator": "Perform basic arithmetic operations like addition, subtraction, multiplication, and division instantly.",
+        "QR Code": "Generate QR codes for URLs, text, contact info, or WiFi credentials. Scan and share easily.",
+        "Password": "Create strong, random passwords with customizable length and character types for maximum security.",
+        "BMI": "Calculate Body Mass Index to check if your weight is healthy according to your height.",
+        "EMI": "Calculate monthly loan installments with interest rate and tenure. Plan your finances better."
+    };
+    
+    function getToolDescription(toolName, baseName, categoryName) {
+        for(let key in toolDescriptions) {
+            if(toolName.toLowerCase().includes(key.toLowerCase())) {
+                return toolDescriptions[key] + ` Perfect for ${categoryName}.`;
+            }
+        }
+        return `Professional ${baseName} tool for ${categoryName}. Fast, accurate, and easy to use.`;
+    }
     
     let iconsList = ["🔧","🛠️","📊","📱","💻","🎨","⚙️","📐","🧮","🔢","📈","💰","💵","🏦","💳","🖥️","📲","🔐","🛡️","⚡","🥇","🎯","💡","🔑","📦","🔄","🤖","🎮","📚","✏️","📝","🎬","📹","🎵","🎧","📡","🔬","🧪","💊","🩺","🏥","🏫","🏢","🏭","🏪","🏠","🌍","🚀","⭐","🔥"];
     
     function getToolHandler(name) {
         return function() {
             let lower = name.toLowerCase();
-            if(lower.includes('qr')) { let v = prompt('Enter text/URL:'); if(v) alert(`✅ QR: ${v}`); }
+            if(lower.includes('qr')) { let v = prompt('Enter text/URL:'); if(v) alert(`✅ QR Code: ${v}`); }
             else if(lower.includes('bmi')) { let h = prompt('Height (cm):'); if(h) { let w = prompt('Weight (kg):'); if(w) { let bmi = (parseFloat(w)/((parseFloat(h)/100)**2)).toFixed(1); alert(`BMI: ${bmi}`); } } }
             else if(lower.includes('password')) { let l = prompt('Length:', '12'); if(l) { let c='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*', p=''; for(let i=0;i<l;i++) p+=c[Math.floor(Math.random()*c.length)]; alert(`Password: ${p}`); } }
             else if(lower.includes('emi')) { let p = prompt('Loan amount:'); if(p) { let r = prompt('Rate (%):'); if(r) { let n = prompt('Months:'); if(n) { let emi = parseFloat(p) * (parseFloat(r)/12/100) * Math.pow(1+parseFloat(r)/12/100, parseFloat(n)) / (Math.pow(1+parseFloat(r)/12/100, parseFloat(n))-1); alert(`EMI: $${emi.toFixed(2)}/month`); } } } }
@@ -678,36 +820,41 @@
         };
     }
     
-    // Generate tools with proper pricing based on complexity
+    // Generate 10000+ tools properly
     function generateAllTools() {
+        let basicList = ["Calculator","Age","Date","Time","Unit","Temperature","Length","Weight","Speed","Area","Volume","BMI","Percentage","Discount","Tip","GST","RD","FD","PPF","BMR","Calorie","Water","Sleep","Pregnancy","Barcode","Username","Random Number","PDF","Image","JSON","HTML","CSS","Color","World Clock","Stopwatch","Timer","To-Do","Notes","Expense","Budget","Grade","GPA","Attendance","Study","Flashcard","Quiz","Algebra","Matrix","Statistics","Prime","Fibonacci","Fraction","Binary","MD5","SHA","Base64","URL Short","SEO","Word Count","Case Convert","Palindrome","Lorem","XML","CSV","SQL","Button","Gradient","Icon","Emoji","Font","Responsive","IP","DNS","Ping","SSL"];
+        let mediumList = ["QR Code","Password Generator","Username Generator","Color Picker","EMI Calculator","Loan Calculator","Mortgage Calculator","SIP Calculator","GPA Calculator","Grade Calculator","Attendance Tracker","Study Timer","Flashcard Maker","Quiz Maker","Word Counter","Character Counter","Case Converter","Palindrome Checker","Lorem Ipsum Generator","JSON Formatter","HTML Minifier","CSS Editor","XML Formatter","SQL Formatter","MD5 Generator","SHA Generator","Base64 Encoder","URL Shortener","SEO Analyzer","Grammar Checker"];
+        let advancedList = ["PDF Editor","Image Compressor","AI Text Generator","Sentiment Analyzer","Data Visualizer","Chart Generator","API Tester","Code Formatter","Plagiarism Checker","Video Editor","Audio Converter","File Compressor","Encryption Tool","Decryption Tool","Password Manager","VPN Tool","Network Scanner","Port Checker","SSL Checker","Whois Lookup"];
+        
+        // 10000+ tools ke liye per category ~850-900 tools
         let toolsPerCat = Math.floor(10100 / categories.length);
+        
         for(let i = 0; i < categories.length; i++) {
             categories[i].tools = [];
             for(let j = 0; j < toolsPerCat; j++) {
-                let level, toolName;
+                let level, baseName, toolName;
                 let rand = Math.random();
-                if(rand < 0.4) { // 40% basic tools
+                if(rand < 0.4) {
                     level = 'basic';
-                    let base = basicTools[j % basicTools.length];
-                    toolName = base + (j === 0 ? " Pro" : (j % 15 === 0 ? " Basic" : " " + (j+1)));
-                } else if(rand < 0.7) { // 30% medium tools
+                    baseName = basicList[j % basicList.length];
+                    toolName = baseName + (j === 0 ? " Pro" : (j % 15 === 0 ? " Basic" : " " + (j+1)));
+                } else if(rand < 0.7) {
                     level = 'medium';
-                    let base = mediumTools[j % mediumTools.length];
-                    toolName = base + (j === 0 ? " Pro" : (j % 15 === 0 ? " Plus" : " " + (j+1)));
-                } else { // 30% advanced tools
+                    baseName = mediumList[j % mediumList.length];
+                    toolName = baseName + (j === 0 ? " Pro" : (j % 15 === 0 ? " Plus" : " " + (j+1)));
+                } else {
                     level = 'advanced';
-                    let base = advancedTools[j % advancedTools.length];
-                    toolName = base + (j === 0 ? " Pro" : (j % 15 === 0 ? " Premium" : " " + (j+1)));
+                    baseName = advancedList[j % advancedList.length];
+                    toolName = baseName + (j === 0 ? " Pro" : (j % 15 === 0 ? " Premium" : " " + (j+1)));
                 }
-                
                 let price = getPriceByLevel(level);
                 categories[i].tools.push({
                     id: Date.now() + i * 1000000 + j,
-                    name: toolName.length > 30 ? toolName.substring(0,27)+"..." : toolName,
+                    name: toolName.length > 35 ? toolName.substring(0,32)+"..." : toolName,
                     icon: iconsList[Math.floor(Math.random() * iconsList.length)],
                     price: price,
                     level: level,
-                    desc: `Professional ${toolName.split(' ')[0]} tool for ${categories[i].name}`,
+                    desc: getToolDescription(toolName, baseName, categories[i].name),
                     handler: getToolHandler(toolName)
                 });
             }
@@ -715,18 +862,23 @@
     }
     
     generateAllTools();
+    loadRatings();
     
     let currentCategoryId = 0;
     let currentTool = null;
     let isAdminLoggedIn = false;
+    let currentPage = 1;
+    const toolsPerPage = 24;
+    let currentSearchTerm = "";
+    let currentFilteredTools = [];
     
     function saveAllData() {
-        let data = { categories, websiteSettings, websiteSections, portfolioData };
-        localStorage.setItem("raha_full_admin_v8", JSON.stringify(data));
+        let data = { categories, websiteSettings, portfolioData, toolRatings };
+        localStorage.setItem("raha_complete_website_v6", JSON.stringify(data));
     }
     
     function loadAllData() {
-        let saved = localStorage.getItem("raha_full_admin_v8");
+        let saved = localStorage.getItem("raha_complete_website_v6");
         if(saved) {
             try {
                 let data = JSON.parse(saved);
@@ -739,16 +891,15 @@
                     }
                 }
                 if(data.websiteSettings) websiteSettings = data.websiteSettings;
-                if(data.websiteSections) websiteSections = data.websiteSections;
                 if(data.portfolioData) portfolioData = data.portfolioData;
+                if(data.toolRatings) toolRatings = data.toolRatings;
             } catch(e) {}
         }
         applyWebsiteSettings();
-        renderNavLinks();
-        renderDynamicSections();
-        renderCategoryButtons();
-        selectCategory(0);
+        renderUI();
         updateStats();
+        renderPortfolioPage();
+        setupEventListeners();
     }
     
     function applyWebsiteSettings() {
@@ -757,102 +908,7 @@
         document.body.style.background = `linear-gradient(135deg, ${websiteSettings.bgStart}, ${websiteSettings.bgEnd})`;
         let copyright = document.querySelector('.copyright');
         if(copyright) copyright.innerHTML = `<p>${websiteSettings.copyright}</p>`;
-    }
-    
-    function renderNavLinks() {
-        let container = document.getElementById('navLinks');
-        container.innerHTML = '<a onclick="showSection(\'home\')">🏠 Home</a><a onclick="showSection(\'portfolio\')">📸 Portfolio</a>';
-        let enabledSections = websiteSections.filter(s => s.enabled);
-        enabledSections.sort((a,b) => a.order - b.order);
-        for(let sec of enabledSections) {
-            let a = document.createElement('a');
-            a.innerHTML = `${sec.icon} ${sec.name}`;
-            a.onclick = () => showSection(sec.id);
-            container.appendChild(a);
-        }
-    }
-    
-    function renderDynamicSections() {
-        let container = document.getElementById('dynamicSectionsContainer');
-        container.innerHTML = '';
-        
-        let catsDiv = document.createElement('div');
-        catsDiv.id = "categoriesSection";
-        catsDiv.innerHTML = `<div class="category-buttons" id="categoryButtons"></div><h2 class="section-title" id="currentCategoryTitle">Loading...</h2><div id="toolsGrid" class="tools-grid"></div>`;
-        container.appendChild(catsDiv);
-        
-        let portfolioDiv = document.createElement('div');
-        portfolioDiv.id = "section_portfolio_main";
-        portfolioDiv.className = "portfolio-section";
-        portfolioDiv.innerHTML = `
-            <h2 class="section-title">📸 My Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="profile-card">
-                    ${portfolioData.profilePhoto ? `<img src="${portfolioData.profilePhoto}" class="profile-img" alt="Profile">` : '<div class="profile-img-placeholder">👤</div>'}
-                    <h3>${portfolioData.profileName || "RahaMat Ali"}</h3>
-                    <p>${portfolioData.profileBio || "Web Tools Developer | 10,000+ Tools Created"}</p>
-                    <p><strong>Skills:</strong> ${portfolioData.profileSkills || "HTML, CSS, JavaScript, Web Apps"}</p>
-                </div>
-            </div>
-        `;
-        container.appendChild(portfolioDiv);
-        
-        let enabledSections = websiteSections.filter(s => s.enabled);
-        enabledSections.sort((a,b) => a.order - b.order);
-        for(let sec of enabledSections) {
-            let sectionDiv = document.createElement('div');
-            sectionDiv.id = `section_${sec.id}`;
-            sectionDiv.className = 'dynamic-section';
-            sectionDiv.style.display = 'none';
-            if(sec.type === 'about') {
-                sectionDiv.innerHTML = `<div class="about-section">${sec.content || "<h2>About</h2><p>Content here</p>"}</div>`;
-            } else if(sec.type === 'contact') {
-                sectionDiv.innerHTML = `
-                    <div class="contact-card">
-                        <h2>${sec.icon} ${sec.name}</h2>
-                        <p>${sec.content || "Need help? Contact us!"}</p>
-                        <button class="whatsapp-btn" onclick="window.open('https://wa.me/${websiteSettings.whatsapp}?text=${encodeURIComponent('Hi! I need help.')}', '_blank')">💬 Message on WhatsApp</button>
-                        <p style="margin-top:20px;">📧 Email: ${websiteSettings.email}</p>
-                    </div>
-                `;
-            } else {
-                sectionDiv.innerHTML = `<div class="about-section">${sec.content || "<h2>Custom Section</h2>"}</div>`;
-            }
-            container.appendChild(sectionDiv);
-        }
-        
-        window.categoryButtonsDiv = document.getElementById('categoryButtons');
-        window.currentCategoryTitleSpan = document.getElementById('currentCategoryTitle');
-        window.toolsGridDiv = document.getElementById('toolsGrid');
-    }
-    
-    function showSection(sectionId) {
-        let sections = document.querySelectorAll('#dynamicSectionsContainer > div');
-        for(let s of sections) s.style.display = 'none';
-        if(sectionId === 'home' || !sectionId) {
-            let catsSection = document.getElementById('categoriesSection');
-            if(catsSection) catsSection.style.display = 'block';
-        } else if(sectionId === 'portfolio') {
-            let portfolioSec = document.getElementById('section_portfolio_main');
-            if(portfolioSec) portfolioSec.style.display = 'block';
-        } else {
-            let target = document.getElementById(`section_${sectionId}`);
-            if(target) target.style.display = 'block';
-        }
-        let links = document.querySelectorAll('.nav-links a');
-        for(let l of links) l.classList.remove('active');
-        if(sectionId === 'home' || !sectionId) {
-            if(links[0]) links[0].classList.add('active');
-        } else if(sectionId === 'portfolio') {
-            for(let l of links) {
-                if(l.innerHTML.includes('Portfolio')) l.classList.add('active');
-            }
-        } else {
-            for(let l of links) {
-                if(l.innerHTML.includes(sectionId)) l.classList.add('active');
-            }
-        }
-        if(sectionId === 'home' || !sectionId) selectCategory(currentCategoryId);
+        document.getElementById('contactEmail').innerText = websiteSettings.email;
     }
     
     function updateStats() {
@@ -861,8 +917,16 @@
         document.getElementById('categoryCount').innerText = categories.length;
     }
     
-    function renderCategoryButtons() {
-        let container = document.getElementById('categoryButtons');
+    function renderUI() {
+        renderTopCategoryButtons();
+        renderHomeCategories();
+        if(document.getElementById('toolsPage').classList.contains('active')) {
+            filterAndDisplayTools();
+        }
+    }
+    
+    function renderTopCategoryButtons() {
+        let container = document.getElementById('topCategoryButtons');
         if(!container) return;
         container.innerHTML = '';
         for(let i = 0; i < categories.length; i++) {
@@ -870,42 +934,233 @@
             btn.className = 'cat-btn';
             if(i === currentCategoryId) btn.classList.add('active');
             btn.innerHTML = `${categories[i].icon} ${categories[i].name}`;
-            btn.onclick = (function(idx) { return function() { selectCategory(idx); showSection('home'); }; })(i);
+            btn.onclick = (function(idx) { return function() { selectToolsCategory(idx); }; })(i);
             container.appendChild(btn);
         }
     }
     
-    function selectCategory(catId) {
-        if(catId >= categories.length) catId = 0;
+    function selectToolsCategory(catId) {
         currentCategoryId = catId;
-        let cat = categories[catId];
-        let btns = document.querySelectorAll('.cat-btn');
+        currentPage = 1;
+        currentSearchTerm = "";
+        let searchInput = document.getElementById('searchInput');
+        if(searchInput) searchInput.value = "";
+        filterAndDisplayTools();
+        
+        let btns = document.querySelectorAll('#topCategoryButtons .cat-btn');
         for(let i = 0; i < btns.length; i++) {
             if(i === catId) btns[i].classList.add('active');
             else btns[i].classList.remove('active');
         }
-        let titleSpan = document.getElementById('currentCategoryTitle');
-        if(titleSpan) titleSpan.innerHTML = `${cat.icon} ${cat.name} Tools — ${cat.tools.length} Tools`;
-        let grid = document.getElementById('toolsGrid');
-        if(!grid) return;
-        grid.innerHTML = '';
-        for(let tool of cat.tools) {
-            let priceClass = getPriceClass(tool.price);
-            let card = document.createElement('div');
-            card.className = 'tool-card';
-            card.innerHTML = `
-                <div class="price-tag ${priceClass}">$${tool.price}</div>
-                <div class="tool-icon">${tool.icon}</div>
-                <h4>${tool.name.substring(0,25)}</h4>
-                <p>${tool.desc.substring(0,40)}</p>
-                <div class="tool-buttons">
-                    <button class="demo-btn" onclick="event.stopPropagation(); openTool('${tool.name.replace(/'/g, "\\'")}')">🎬 Demo</button>
-                    <button class="buy-btn" onclick="event.stopPropagation(); buyTool('${tool.name.replace(/'/g, "\\'")}', ${tool.price})">💳 Buy</button>
-                </div>
-            `;
-            card.onclick = () => openTool(tool.name);
-            grid.appendChild(card);
+    }
+    
+    function renderHomeCategories() {
+        let container = document.getElementById('homeCategoriesSection');
+        if(!container) return;
+        container.innerHTML = '';
+        
+        for(let cat of categories) {
+            let section = document.createElement('div');
+            section.style.margin = '30px 0';
+            
+            let header = document.createElement('h2');
+            header.className = 'section-title';
+            header.innerHTML = `${cat.icon} ${cat.name} Tools — ${cat.tools.length} Tools`;
+            header.style.cursor = 'pointer';
+            header.onclick = () => { showPage('tools'); setTimeout(() => selectToolsCategory(cat.id), 100); };
+            
+            let grid = document.createElement('div');
+            grid.className = 'tools-grid';
+            
+            let previewTools = cat.tools.slice(0, 4);
+            for(let tool of previewTools) {
+                let rating = getToolRating(tool.id);
+                let priceClass = getPriceClass(tool.price);
+                let card = document.createElement('div');
+                card.className = 'tool-card';
+                card.style.position = 'relative';
+                card.innerHTML = `
+                    <div class="price-tag ${priceClass}">$${tool.price}</div>
+                    <div class="tool-icon">${tool.icon}</div>
+                    <h4>${tool.name.substring(0,25)}</h4>
+                    <p>${tool.desc.substring(0,50)}...</p>
+                    <div class="rating-container">
+                        <span class="star">★</span>
+                        <span class="rating-number">${rating}</span>
+                        <span class="reviews-count">(1.2k reviews)</span>
+                    </div>
+                    <div class="tool-buttons">
+                        <button class="demo-btn" onclick="event.stopPropagation(); openTool('${tool.name.replace(/'/g, "\\'")}')">🎬 Demo</button>
+                        <button class="buy-btn" onclick="event.stopPropagation(); buyTool('${tool.name.replace(/'/g, "\\'")}', ${tool.price})">💳 Buy</button>
+                    </div>
+                `;
+                card.onclick = () => openTool(tool.name);
+                grid.appendChild(card);
+            }
+            
+            let viewAllBtn = document.createElement('div');
+            viewAllBtn.style.textAlign = 'center';
+            viewAllBtn.style.marginTop = '15px';
+            viewAllBtn.innerHTML = `<button class="cat-btn" onclick="showPage('tools'); setTimeout(() => selectToolsCategory(${cat.id}), 100)">🔍 View All ${cat.tools.length} Tools →</button>`;
+            
+            section.appendChild(header);
+            section.appendChild(grid);
+            section.appendChild(viewAllBtn);
+            container.appendChild(section);
         }
+    }
+    
+    function filterAndDisplayTools() {
+        let cat = categories[currentCategoryId];
+        let allTools = cat.tools;
+        
+        if(currentSearchTerm) {
+            currentFilteredTools = allTools.filter(tool => 
+                tool.name.toLowerCase().includes(currentSearchTerm) || 
+                tool.desc.toLowerCase().includes(currentSearchTerm)
+            );
+            document.getElementById('toolsHeader').innerHTML = `<div class="section-title">🔍 Search Results: "${currentSearchTerm}" (${currentFilteredTools.length} tools)</div>`;
+        } else {
+            currentFilteredTools = [...allTools];
+            document.getElementById('toolsHeader').innerHTML = `<div class="section-title">${cat.icon} ${cat.name} Tools — ${currentFilteredTools.length} Tools</div>`;
+        }
+        displayToolsForCurrentPage();
+    }
+    
+    function displayToolsForCurrentPage() {
+        let loader = document.getElementById('toolsLoader');
+        let grid = document.getElementById('toolsGridContainer');
+        if(loader) loader.style.display = 'block';
+        if(grid) grid.innerHTML = '';
+        
+        setTimeout(() => {
+            let start = (currentPage - 1) * toolsPerPage;
+            let end = start + toolsPerPage;
+            let pageTools = currentFilteredTools.slice(start, end);
+            
+            if(loader) loader.style.display = 'none';
+            if(!grid) return;
+            
+            if(pageTools.length === 0) {
+                grid.innerHTML = `<div class="empty-state"><h3>🔍 No tools found</h3><p>Try searching for something else</p></div>`;
+                renderPagination();
+                return;
+            }
+            
+            grid.innerHTML = '';
+            for(let tool of pageTools) {
+                let rating = getToolRating(tool.id);
+                let priceClass = getPriceClass(tool.price);
+                let card = document.createElement('div');
+                card.className = 'tool-card';
+                card.style.position = 'relative';
+                card.innerHTML = `
+                    <div class="price-tag ${priceClass}">$${tool.price}</div>
+                    <div class="tool-icon">${tool.icon}</div>
+                    <h4>${tool.name.substring(0,30)}</h4>
+                    <p>${tool.desc.substring(0,60)}...</p>
+                    <div class="rating-container">
+                        <span class="star">★</span>
+                        <span class="rating-number">${rating}</span>
+                        <span class="reviews-count">(1.2k reviews)</span>
+                    </div>
+                    <div class="tool-buttons">
+                        <button class="demo-btn" onclick="event.stopPropagation(); openTool('${tool.name.replace(/'/g, "\\'")}')">🎬 Demo</button>
+                        <button class="buy-btn" onclick="event.stopPropagation(); buyTool('${tool.name.replace(/'/g, "\\'")}', ${tool.price})">💳 Buy</button>
+                    </div>
+                `;
+                card.onclick = () => openTool(tool.name);
+                grid.appendChild(card);
+            }
+            renderPagination();
+        }, 100);
+    }
+    
+    function renderPagination() {
+        let container = document.getElementById('paginationContainer');
+        if(!container) return;
+        let totalPages = Math.ceil(currentFilteredTools.length / toolsPerPage);
+        if(totalPages <= 1) { container.innerHTML = ''; return; }
+        
+        let html = '';
+        html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>◀ Prev</button>`;
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, currentPage + 2);
+        for(let i = startPage; i <= endPage; i++) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+        }
+        html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next ▶</button>`;
+        container.innerHTML = html;
+    }
+    
+    function changePage(page) {
+        let totalPages = Math.ceil(currentFilteredTools.length / toolsPerPage);
+        if(page < 1 || page > totalPages) return;
+        currentPage = page;
+        displayToolsForCurrentPage();
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+    
+    function renderPortfolioPage() {
+        let photoContainer = document.getElementById('portfolioPhotoContainer');
+        if(photoContainer) {
+            if(portfolioData.profilePhoto) {
+                photoContainer.innerHTML = `<img src="${portfolioData.profilePhoto}" class="portfolio-img" alt="Profile">`;
+            } else {
+                photoContainer.innerHTML = `<div class="portfolio-img-placeholder">👤</div>`;
+            }
+        }
+        document.getElementById('portfolioName').innerText = portfolioData.profileName;
+        document.getElementById('portfolioBio').innerText = portfolioData.profileBio;
+        
+        let skillsContainer = document.getElementById('portfolioSkills');
+        if(skillsContainer) {
+            skillsContainer.innerHTML = '';
+            let skills = Array.isArray(portfolioData.profileSkills) ? portfolioData.profileSkills : portfolioData.profileSkills.split(',').map(s => s.trim());
+            for(let skill of skills) {
+                skillsContainer.innerHTML += `<span class="skill-badge">${skill}</span>`;
+            }
+        }
+    }
+    
+    function showPage(pageName) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+        
+        let topCategoryBar = document.getElementById('categoryButtonsTop');
+        let heroSection = document.getElementById('heroSection');
+        
+        if(pageName === 'home') {
+            document.getElementById('homePage').classList.add('active');
+            document.querySelector('.nav-links a:first-child').classList.add('active');
+            if(topCategoryBar) topCategoryBar.style.display = 'none';
+            if(heroSection) heroSection.style.display = 'block';
+            renderHomeCategories();
+        } else if(pageName === 'tools') {
+            document.getElementById('toolsPage').classList.add('active');
+            document.querySelector('.nav-links a:nth-child(2)').classList.add('active');
+            if(topCategoryBar) topCategoryBar.style.display = 'block';
+            if(heroSection) heroSection.style.display = 'none';
+            renderTopCategoryButtons();
+            filterAndDisplayTools();
+        } else if(pageName === 'portfolio') {
+            document.getElementById('portfolioPage').classList.add('active');
+            document.querySelector('.nav-links a:nth-child(3)').classList.add('active');
+            if(topCategoryBar) topCategoryBar.style.display = 'none';
+            if(heroSection) heroSection.style.display = 'none';
+            renderPortfolioPage();
+        } else if(pageName === 'about') {
+            document.getElementById('aboutPage').classList.add('active');
+            document.querySelector('.nav-links a:nth-child(4)').classList.add('active');
+            if(topCategoryBar) topCategoryBar.style.display = 'none';
+            if(heroSection) heroSection.style.display = 'none';
+        } else if(pageName === 'contact') {
+            document.getElementById('contactPage').classList.add('active');
+            document.querySelector('.nav-links a:nth-child(5)').classList.add('active');
+            if(topCategoryBar) topCategoryBar.style.display = 'none';
+            if(heroSection) heroSection.style.display = 'none';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
     function openTool(toolName) {
@@ -923,7 +1178,7 @@
         }
     }
     
-    document.getElementById('modalDemoBtn').onclick = () => { if(currentTool && currentTool.handler) currentTool.handler(); closeToolModal(); };
+    document.getElementById('modalDemoBtn').onclick = () => { if(currentTool && currentTool.handler) { currentTool.handler(); closeToolModal(); } };
     document.getElementById('modalBuyBtn').onclick = () => { if(currentTool) buyTool(currentTool.name, currentTool.price); closeToolModal(); };
     
     function buyTool(toolName, price) {
@@ -931,6 +1186,29 @@
     }
     
     function closeToolModal() { document.getElementById('toolModal').style.display = 'none'; }
+    
+    function setupEventListeners() {
+        let searchInput = document.getElementById('searchInput');
+        if(searchInput) {
+            searchInput.onkeyup = function() {
+                currentSearchTerm = this.value.toLowerCase();
+                currentPage = 1;
+                if(document.getElementById('toolsPage').classList.contains('active')) {
+                    filterAndDisplayTools();
+                }
+            };
+        }
+        
+        document.getElementById('contactWhatsappBtn').onclick = () => {
+            window.open(`https://wa.me/${websiteSettings.whatsapp}?text=${encodeURIComponent('Hi! I need help with your tools.')}`, '_blank');
+        };
+        document.getElementById('portfolioWhatsappBtn').onclick = () => {
+            window.open(`https://wa.me/${websiteSettings.whatsapp}?text=${encodeURIComponent('Hi! I saw your portfolio. I\'m interested in your tools.')}`, '_blank');
+        };
+        document.getElementById('portfolioEmailBtn').onclick = () => {
+            window.location.href = `mailto:${websiteSettings.email}`;
+        };
+    }
     
     // Admin Functions
     function showAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
@@ -943,11 +1221,7 @@
             isAdminLoggedIn = true;
             closeAdminLoginModal();
             openAdminPanel();
-            document.getElementById('adminId').value = '';
-            document.getElementById('adminPasswordInput').value = '';
-        } else {
-            alert('Invalid! Admin ID: rahmat | Password: admin123');
-        }
+        } else { alert('Invalid! Admin ID: rahmat | Password: admin123'); }
     }
     
     function openAdminPanel() {
@@ -976,7 +1250,6 @@
         let totalTools = categories.reduce((s,c) => s + c.tools.length, 0);
         document.getElementById('adminTotalCats').innerText = categories.length;
         document.getElementById('adminTotalTools').innerText = totalTools;
-        document.getElementById('adminTotalSections').innerText = websiteSections.length;
         
         let catSelect = document.getElementById('newToolCat');
         catSelect.innerHTML = '';
@@ -987,7 +1260,6 @@
         categories.forEach((c, i) => manageSelect.innerHTML += `<option value="${i}">${c.icon} ${c.name}</option>`);
         
         refreshCategoriesManageList();
-        refreshSectionsManageList();
         
         document.getElementById('editHeroTitle').value = websiteSettings.heroTitle;
         document.getElementById('editHeroDesc').value = websiteSettings.heroDesc;
@@ -998,7 +1270,6 @@
         document.getElementById('bgStart').value = websiteSettings.bgStart;
         document.getElementById('bgEnd').value = websiteSettings.bgEnd;
         
-        // Update price dropdown based on selected level
         updatePriceDropdown();
         document.getElementById('newToolLevel').onchange = updatePriceDropdown;
     }
@@ -1007,49 +1278,44 @@
         let level = document.getElementById('newToolLevel').value;
         let priceSelect = document.getElementById('newToolPrice');
         priceSelect.innerHTML = '';
-        let prices;
-        if(level === 'basic') prices = BASIC_PRICES;
-        else if(level === 'medium') prices = MEDIUM_PRICES;
-        else prices = ADVANCED_PRICES;
-        
-        for(let p of prices) {
-            priceSelect.innerHTML += `<option value="${p}">$${p}</option>`;
-        }
+        let prices = level === 'basic' ? [7,8,9,10] : (level === 'medium' ? [11,12,13,14,15] : [16,17,18,19,20]);
+        for(let p of prices) priceSelect.innerHTML += `<option value="${p}">$${p}</option>`;
     }
     
     function loadPortfolioToForm() {
         document.getElementById('editProfileName').value = portfolioData.profileName || "";
         document.getElementById('editProfileBio').value = portfolioData.profileBio || "";
-        document.getElementById('editProfileSkills').value = portfolioData.profileSkills || "";
+        let skillsStr = Array.isArray(portfolioData.profileSkills) ? portfolioData.profileSkills.join(', ') : portfolioData.profileSkills;
+        document.getElementById('editProfileSkills').value = skillsStr || "";
         let preview = document.getElementById('currentPhotoPreview');
         if(portfolioData.profilePhoto) {
             preview.innerHTML = `<img src="${portfolioData.profilePhoto}" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">`;
-        } else {
-            preview.innerHTML = '<p>No photo uploaded</p>';
-        }
+        } else { preview.innerHTML = '<p>No photo uploaded</p>'; }
     }
     
     function uploadProfilePhoto() {
         let file = document.getElementById('profilePhotoUpload').files[0];
         if(file) {
+            if(file.size > 5 * 1024 * 1024) { alert('Photo size < 5MB'); return; }
             let reader = new FileReader();
             reader.onload = function(e) {
                 portfolioData.profilePhoto = e.target.result;
                 saveAllData();
-                renderDynamicSections();
+                renderPortfolioPage();
                 loadPortfolioToForm();
                 alert('Photo uploaded!');
             };
             reader.readAsDataURL(file);
-        } else { alert('Select a photo first'); }
+        } else { alert('Select a photo'); }
     }
     
     function savePortfolioSettings() {
         portfolioData.profileName = document.getElementById('editProfileName').value;
         portfolioData.profileBio = document.getElementById('editProfileBio').value;
-        portfolioData.profileSkills = document.getElementById('editProfileSkills').value;
+        let skillsStr = document.getElementById('editProfileSkills').value;
+        portfolioData.profileSkills = skillsStr.split(',').map(s => s.trim());
         saveAllData();
-        renderDynamicSections();
+        renderPortfolioPage();
         alert('Portfolio saved!');
     }
     
@@ -1057,15 +1323,7 @@
         let container = document.getElementById('categoriesManageList');
         container.innerHTML = '';
         categories.forEach((cat, idx) => {
-            container.innerHTML += `<div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid rgba(255,255,255,0.1);"><span>${cat.icon} ${cat.name} (${cat.tools.length} tools)</span><div><button onclick="editCategory(${idx})">✏️</button><button class="danger" onclick="deleteCategory(${idx})">❌</button></div></div>`;
-        });
-    }
-    
-    function refreshSectionsManageList() {
-        let container = document.getElementById('sectionsManageList');
-        container.innerHTML = '';
-        websiteSections.forEach((sec, idx) => {
-            container.innerHTML += `<div class="section-list-item"><span>${sec.icon} ${sec.name} (${sec.type})</span><div><button onclick="editSection(${idx})">✏️</button><button onclick="toggleSection(${idx})">${sec.enabled ? '🔴 Disable' : '🟢 Enable'}</button><button class="danger" onclick="deleteSection(${idx})">❌</button></div></div>`;
+            container.innerHTML += `<div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid rgba(255,255,255,0.1);"><span>${cat.icon} ${cat.name} (${cat.tools.length} tools)</span><div><button onclick="editCategory(${idx})">✏️</button><button class="danger" onclick="()=>{}">❌</button></div></div>`;
         });
     }
     
@@ -1073,27 +1331,28 @@
         let catIdx = parseInt(document.getElementById('newToolCat').value);
         let level = document.getElementById('newToolLevel').value;
         let price = parseFloat(document.getElementById('newToolPrice').value);
+        let toolName = document.getElementById('newToolName').value;
         
-        let newTool = {
-            id: Date.now(),
-            name: document.getElementById('newToolName').value,
-            icon: document.getElementById('newToolIcon').value || "🔧",
-            desc: document.getElementById('newToolDesc').value,
-            price: price,
-            level: level,
-            handler: getToolHandler(document.getElementById('newToolName').value)
-        };
-        
-        if(newTool.name && newTool.price >= 7 && newTool.price <= 20) {
+        if(toolName && price >= 7 && price <= 20) {
+            let newTool = {
+                id: Date.now(),
+                name: toolName,
+                icon: document.getElementById('newToolIcon').value || "🔧",
+                desc: document.getElementById('newToolDesc').value || `Professional ${toolName} tool for ${categories[catIdx].name}.`,
+                price: price,
+                level: level,
+                handler: getToolHandler(toolName)
+            };
             categories[catIdx].tools.push(newTool);
             saveAllData();
-            if(currentCategoryId === catIdx) selectCategory(catIdx);
+            if(document.getElementById('toolsPage').classList.contains('active')) filterAndDisplayTools();
+            if(document.getElementById('homePage').classList.contains('active')) renderHomeCategories();
             updateStats();
             refreshAdminData();
             alert('Tool added!');
             document.getElementById('newToolName').value = '';
             document.getElementById('newToolDesc').value = '';
-        } else alert('Please enter tool name and valid price ($7-$20)');
+        } else alert('Enter tool name and valid price ($7-$20)');
     }
     
     function loadToolsForManage() {
@@ -1102,37 +1361,34 @@
         let container = document.getElementById('manageToolsList');
         container.innerHTML = '';
         tools.forEach((tool) => {
-            let priceClass = getPriceClass(tool.price);
-            container.innerHTML += `<div class="tool-list-item"><span>${tool.icon} ${tool.name.substring(0,25)} - <span class="price-tag ${priceClass}" style="position:relative; display:inline-block; margin-left:5px;">$${tool.price}</span></span><div><button onclick="editTool(${catIdx}, ${tool.id})">✏️</button><button class="danger" onclick="deleteTool(${catIdx}, ${tool.id})">❌</button></div></div>`;
+            container.innerHTML += `<div class="tool-list-item"><span>${tool.icon} ${tool.name.substring(0,25)} - $${tool.price}</span><div><button onclick="editToolPrompt(${catIdx}, ${tool.id})">✏️</button><button onclick="deleteToolPrompt(${catIdx}, ${tool.id})">❌</button></div></div>`;
         });
     }
     
-    function editTool(catIdx, toolId) {
+    function editToolPrompt(catIdx, toolId) {
         let tool = categories[catIdx].tools.find(t => t.id === toolId);
         if(tool) {
             let newName = prompt('Edit name:', tool.name);
             let newPrice = prompt('Edit price ($7-$20):', tool.price);
-            let newIcon = prompt('Edit icon:', tool.icon);
             if(newName) tool.name = newName;
             if(newPrice && newPrice >= 7 && newPrice <= 20) tool.price = parseFloat(newPrice);
-            if(newIcon) tool.icon = newIcon;
             tool.handler = getToolHandler(tool.name);
             saveAllData();
-            if(currentCategoryId === catIdx) selectCategory(catIdx);
+            if(document.getElementById('toolsPage').classList.contains('active')) filterAndDisplayTools();
+            if(document.getElementById('homePage').classList.contains('active')) renderHomeCategories();
             loadToolsForManage();
-            refreshAdminData();
             alert('Tool updated!');
         }
     }
     
-    function deleteTool(catIdx, toolId) {
+    function deleteToolPrompt(catIdx, toolId) {
         if(confirm('Delete this tool?')) {
             categories[catIdx].tools = categories[catIdx].tools.filter(t => t.id !== toolId);
             saveAllData();
-            if(currentCategoryId === catIdx) selectCategory(catIdx);
+            if(document.getElementById('toolsPage').classList.contains('active')) filterAndDisplayTools();
+            if(document.getElementById('homePage').classList.contains('active')) renderHomeCategories();
             updateStats();
             loadToolsForManage();
-            refreshAdminData();
             alert('Tool deleted!');
         }
     }
@@ -1143,7 +1399,8 @@
         if(newName) {
             categories.push({ id: categories.length, name: newName, icon: newIcon, tools: [] });
             saveAllData();
-            renderCategoryButtons();
+            renderTopCategoryButtons();
+            renderHomeCategories();
             refreshAdminData();
             alert('Category added!');
             document.getElementById('newCatName').value = '';
@@ -1156,78 +1413,10 @@
         if(newName) categories[catIdx].name = newName;
         if(newIcon) categories[catIdx].icon = newIcon;
         saveAllData();
-        renderCategoryButtons();
+        renderTopCategoryButtons();
+        renderHomeCategories();
         refreshAdminData();
-        if(currentCategoryId === catIdx) selectCategory(catIdx);
-    }
-    
-    function deleteCategory(catIdx) {
-        if(confirm(`Delete "${categories[catIdx].name}" and all ${categories[catIdx].tools.length} tools?`)) {
-            categories.splice(catIdx, 1);
-            for(let i=0; i<categories.length; i++) categories[i].id = i;
-            saveAllData();
-            renderCategoryButtons();
-            refreshAdminData();
-            if(currentCategoryId >= categories.length) currentCategoryId = 0;
-            selectCategory(currentCategoryId);
-            updateStats();
-            alert('Category deleted!');
-        }
-    }
-    
-    function addNewSection() {
-        let newName = document.getElementById('newSectionName').value;
-        let newIcon = document.getElementById('newSectionIcon').value || "📄";
-        let newType = document.getElementById('newSectionType').value;
-        let newContent = document.getElementById('newSectionContent').value;
-        if(newName) {
-            websiteSections.push({ id: `section_${Date.now()}`, name: newName, icon: newIcon, type: newType, content: newContent, order: websiteSections.length, enabled: true });
-            saveAllData();
-            renderNavLinks();
-            renderDynamicSections();
-            renderCategoryButtons();
-            refreshAdminData();
-            alert('Section added!');
-            document.getElementById('newSectionName').value = '';
-            document.getElementById('newSectionContent').value = '';
-        } else alert('Enter section name');
-    }
-    
-    function editSection(idx) {
-        let sec = websiteSections[idx];
-        let newName = prompt('Edit name:', sec.name);
-        let newIcon = prompt('Edit icon:', sec.icon);
-        if(newName) sec.name = newName;
-        if(newIcon) sec.icon = newIcon;
-        let content = prompt('Edit content:', sec.content);
-        if(content !== null) sec.content = content;
-        saveAllData();
-        renderNavLinks();
-        renderDynamicSections();
-        renderCategoryButtons();
-        refreshAdminData();
-        alert('Section updated!');
-    }
-    
-    function toggleSection(idx) {
-        websiteSections[idx].enabled = !websiteSections[idx].enabled;
-        saveAllData();
-        renderNavLinks();
-        renderDynamicSections();
-        renderCategoryButtons();
-        refreshAdminData();
-    }
-    
-    function deleteSection(idx) {
-        if(confirm(`Delete "${websiteSections[idx].name}" section?`)) {
-            websiteSections.splice(idx, 1);
-            saveAllData();
-            renderNavLinks();
-            renderDynamicSections();
-            renderCategoryButtons();
-            refreshAdminData();
-            alert('Section deleted!');
-        }
+        if(currentCategoryId === catIdx && document.getElementById('toolsPage').classList.contains('active')) selectToolsCategory(catIdx);
     }
     
     function saveWebsiteSettings() {
@@ -1241,15 +1430,16 @@
         websiteSettings.bgEnd = document.getElementById('bgEnd').value;
         saveAllData();
         applyWebsiteSettings();
+        setupEventListeners();
         alert('Settings saved!');
     }
     
     function exportData() {
-        let data = { categories, websiteSettings, websiteSections, portfolioData };
+        let data = { categories, websiteSettings, portfolioData, toolRatings };
         let blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
         let a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = "raha_tools_backup.json";
+        a.download = "raha_website_backup.json";
         a.click();
         alert('Data exported!');
     }
@@ -1267,8 +1457,8 @@
                     if(data.categories && data.websiteSettings) {
                         categories = data.categories;
                         websiteSettings = data.websiteSettings;
-                        websiteSections = data.websiteSections || websiteSections;
                         portfolioData = data.portfolioData || portfolioData;
+                        if(data.toolRatings) toolRatings = data.toolRatings;
                         for(let c of categories) {
                             for(let t of c.tools) {
                                 t.handler = getToolHandler(t.name);
@@ -1285,34 +1475,37 @@
     }
     
     function resetToDefault() {
-        if(confirm('⚠️ Reset everything? All changes lost!')) {
-            localStorage.removeItem("raha_full_admin_v8");
+        if(confirm('⚠️ Reset everything? All changes will be lost!')) {
+            localStorage.clear();
             location.reload();
         }
     }
     
     let footer = document.createElement('footer');
     footer.className = 'footer';
-    footer.innerHTML = `<div class="footer-content"><div class="footer-section"><h4>RahaMatAli.Tools</h4><p>10,000+ Professional Web Tools</p></div><div class="footer-section"><h4>Quick Links</h4><a onclick="showSection('home')">Home</a><a onclick="showSection('portfolio')">Portfolio</a></div><div class="footer-section"><h4>Contact</h4><p>WhatsApp: +91 9074797019</p><p>Email: RahamatTool@gmail.com</p></div></div><div class="copyright"><p>© 2026 RahaMat Ali — All Rights Reserved</p></div>`;
+    footer.innerHTML = `<div class="footer-content"><div class="footer-section"><h4>RahaMatAli.Tools</h4><p>10,000+ Professional Web Tools</p></div><div class="footer-section"><h4>Quick Links</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('tools')">All Tools</a><a onclick="showPage('portfolio')">Portfolio</a><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div><div class="footer-section"><h4>Contact</h4><p>WhatsApp: +91 9074797019</p><p>Email: RahamatTool@gmail.com</p></div></div><div class="copyright"><p>© 2026 RahaMat Ali — All Rights Reserved</p></div>`;
     document.body.appendChild(footer);
     
     window.onscroll = function() {
-        let scrollTop = document.getElementById('scrollTop');
-        if(!scrollTop) {
-            let st = document.createElement('div');
-            st.className = 'scroll-top';
-            st.id = 'scrollTop';
-            st.innerHTML = '↑';
-            st.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
-            document.body.appendChild(st);
-        }
         let st = document.getElementById('scrollTop');
-        if(window.scrollY > 200) st.classList.add('show');
-        else st.classList.remove('show');
+        if(!st) {
+            let stNew = document.createElement('div');
+            stNew.className = 'scroll-top';
+            stNew.id = 'scrollTop';
+            stNew.innerHTML = '↑';
+            stNew.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+            document.body.appendChild(stNew);
+        }
+        let scrollTop = document.getElementById('scrollTop');
+        if(window.scrollY > 200) scrollTop.classList.add('show');
+        else scrollTop.classList.remove('show');
     };
     
+    window.changePage = changePage;
+    window.showPage = showPage;
+    
     loadAllData();
-    showSection('home');
+    showPage('home');
 </script>
 </body>
 </html>
